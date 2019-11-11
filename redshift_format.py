@@ -13,7 +13,7 @@ def jdbc_redshift_example(spark):
     redshiftDF.write \
         .format("com.databricks.spark.redshift") \
         .option("url", "jdbc:redshift://aws-redshift.c3iskdv9vipb.us-east-1.redshift.amazonaws.com:5439/world?user=master&password=test123") \
-        .option("dbtable", "demo.country") \
+        .option("dbtable", "demo.city1") \
         .option("tempdir", "s3n://path/for/temp/data") \
 		.mode("error") \
         .save()
