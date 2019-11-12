@@ -7,5 +7,5 @@ def jdbc_oracle_example1(spark):
 
 if __name__ == "__main__":
        spark = SparkSession.builder.appName("jdbc_api").getOrCreate()
-       jdbc_oracle_example1(spark)
+       jdbc_oracle_example111(spark)
        spark.stop()
