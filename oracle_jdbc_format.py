@@ -6,7 +6,7 @@ from pyspark.sql import Row
 
 def jdbc_dataset_example(spark):
     jdbcDF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.PEOPLE").option("user", "pyspark").option("password", "pyspark").load()
-    jdbcDF.filter(jdbcDF.AGE>18).select("NAME","AGE","HEIGHT").write.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.ADULTS").option("user", "pyspark").option("password", "pyspark").save()
+    jdbcDF.write.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.ADULTS").option("user", "pyspark").option("password", "pyspark").save()
     
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("Python Spark SQL data source example").getOrCreate()
