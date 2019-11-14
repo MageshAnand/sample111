@@ -5,9 +5,9 @@ from pyspark.sql import Row
 
 
 def jdbc_dataset_example(spark):
-    jdbcDF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.PEOPLE").option("user", "pyspark").option("password", "pyspark").load()
-    oracleDF = jdbcDF.coalesce(3)
-    oracleDF.write.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.ADULTS").option("user", "pyspark").option("password", "pyspark").save()
+    peopleDF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.PEOPLE").option("user", "pyspark").option("password", "pyspark").load()
+    adultsDF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.ADULTS").option("user", "pyspark").option("password", "pyspark").load()
+    jdbcDF = peopleDF.intersect(adultsDF)
     
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("Python Spark SQL data source example").getOrCreate()
