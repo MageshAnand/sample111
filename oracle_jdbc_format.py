@@ -5,7 +5,7 @@ from pyspark.sql import Row
 def jdbc_join_example(spark):
     dep1DF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.DEPARTMENT1").option("user", "pyspark").option("password", "pyspark").load()
     dep2DF = spark.read.format("jdbc").option("url", "jdbc:oracle:thin:@localhost:1521:orcl").option("driver","oracle.jdbc.driver.OracleDriver").option("dbtable", "COLLECTOR.DEPARTMENT2").option("user", "pyspark").option("password", "pyspark").load()
-    departmentDF = dep1DF.join(dep2DF)
+    departmentDF = dep2DF.subtract(dep1DF)
     
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("Python Spark SQL data source example").getOrCreate()
