@@ -10,11 +10,11 @@ def jdbc_withColumn_example(spark):
             'oracle.jdbc.driver.OracleDriver').option('dbtable',
             'COLLECTOR.PEOPLE').option('user', 'pyspark'
             ).option('password', 'pyspark').load()
-    oracleDF = jdbcDF.withColumn("phone",jdbcDF.AGE+2)
+    oracleDF = jdbcDF.withColumn("PHONE",jdbcDF.AGE+2)
     oracleDF.write.format('jdbc').option('url',
             'jdbc:oracle:thin:@localhost:1521:orcl').option('driver',
             'oracle.jdbc.driver.OracleDriver').option('dbtable',
-            'COLLECTOR.ADULTS').option('user', 'pyspark'
+            'COLLECTOR.ADULTS2').option('user', 'pyspark'
             ).option('password', 'pyspark').save()
  
  
