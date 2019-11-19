@@ -1,12 +1,13 @@
-from pyspark.sql import SparkSession
+import sys
 
-def copyToTarget(spark):
-	df = spark.read.load("hdfs:///tmp/HDFS/parquet/source.parquet")
-	df.select("name").write.save("hdfs:///tmp/HDFS/parquet/target1.parquet")
-	df1 = spark.read.load("hdfs:///tmp/HDFS/parquet/source.parquet")
-	df1.select("name", "favorite_color").write.save("hdfs:///tmp/HDFS/parquet/target2.parquet")
-	
+from pyspark import SparkContext
+
+def rddDev(sc):
+ rddHadoop = sc.hadoopFile("hdfs:///tmp/HDFS/RDD/sample","org.apache.hadoop.mapred.TextInputFormat","org.apache.hadoop.io.Text","org.apache.hadoop.io.Text")
+ rddHadoop.saveAsHadoopFile("hdfs:///tmp/HDFS/RDD/target","org.apache.hadoop.mapred.TextOutputFormat","org.apache.hadoop.io.Text","org.apache.hadoop.io.Text")
+
 if __name__ == "__main__":
-    spark = SparkSession.builder.appName("Python Spark SQL data source example").getOrCreate()
-    copyToTarget(spark)
-    spark.stop()
+ # create Spark context with Spark configuration
+ conf = SparkConf().setAppName("Read hadoop to RDD - Python")
+ sc = SparkContext(conf)
+ rddDev(sc)
