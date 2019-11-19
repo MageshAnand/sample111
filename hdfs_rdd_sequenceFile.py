@@ -3,7 +3,7 @@ import sys
 from pyspark import SparkContext
 
 def rddHadoopSequence(sc):
- rddData = sc.sequenceFile("hdfs:///tmp/HDFS/RDD/source, "org.apache.hadoop.io.Text", "org.apache.hadoop.io.DoubleWritable")
+ rddData = sc.sequenceFile("hdfs:///tmp/HDFS/RDD/source", "org.apache.hadoop.io.Text", "org.apache.hadoop.io.DoubleWritable")
  rddData.saveAsSequenceFile("hdfs:///tmp/HDFS/RDD/target")
 
 if __name__ == "__main__":
