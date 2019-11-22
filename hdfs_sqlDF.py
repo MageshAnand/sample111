@@ -3,7 +3,7 @@ import sys
 from pyspark import SparkContext
 
 def msSqlWrite(sc):
- sqlDF = sc.sequenceFile("hdfs:///tmp/HDFS/RDD/source", "org.apache.hadoop.io.Text", "org.apache.hadoop.io.DoubleWritablee")
+ sqlDF = sc.sequenceFile("hdfs:///tmp/HDFS/RDD/source", "org.apache.hadoop.io.Text", "org.apache.hadoop.io.DoubleWritable")
  sqlDF.saveAsSequenceFile("hdfs:///tmp/HDFS/RDD/target")
 
 if __name__ == "__main__":
